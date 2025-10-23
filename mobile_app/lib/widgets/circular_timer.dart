@@ -7,11 +7,11 @@ class CircularTimer extends StatelessWidget {
   final bool isLocked;
 
   const CircularTimer({
-    Key? key,
+    super.key,
     required this.remainingMinutes,
     required this.totalMinutes,
     this.isLocked = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +26,14 @@ class CircularTimer extends StatelessWidget {
     if (isLocked) {
       progressColor = Colors.red;
     } else if (percentage > 0.5) {
-      progressColor = Color(0xFF4ECDC4);
+      progressColor = const Color(0xFF4ECDC4);
     } else if (percentage > 0.2) {
       progressColor = Colors.orange;
     } else {
       progressColor = Colors.red;
     }
 
-    return Container(
+    return SizedBox(
       width: 200,
       height: 200,
       child: Stack(
@@ -50,7 +50,7 @@ class CircularTimer extends StatelessWidget {
           ),
           // Progress indicator
           CustomPaint(
-            size: Size(200, 200),
+            size: const Size(200, 200),
             painter: CircularProgressPainter(
               progress: percentage,
               color: progressColor,
@@ -62,7 +62,7 @@ class CircularTimer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (isLocked)
-                Icon(
+                const Icon(
                   Icons.lock,
                   size: 48,
                   color: Colors.red,
@@ -70,16 +70,16 @@ class CircularTimer extends StatelessWidget {
               else
                 Text(
                   '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 42,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF2D3436),
                   ),
                 ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 isLocked ? '已鎖定' : '剩餘時間',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14,
                   color: Color(0xFF636E72),
                 ),

@@ -29,16 +29,16 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Kids Time Control',
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        primaryColor: Color(0xFF7C4DFF),
-        accentColor: Color(0xFF4ECDC4),
+        primaryColor: const Color(0xFF7C4DFF),
         fontFamily: 'Roboto',
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        visualDensity: VisualDensity.adaptivePlatformDensity, colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple).copyWith(secondary: Color(0xFF4ECDC4)),
       ),
       home: AuthWrapper(),
       debugShowCheckedModeBanner: false,
@@ -47,6 +47,8 @@ class MyApp extends StatelessWidget {
 }
 
 class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();

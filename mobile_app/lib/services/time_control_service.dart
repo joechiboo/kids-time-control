@@ -129,7 +129,7 @@ class TimeControlService {
   }
 
   void _startUsageTracking() {
-    _usageTimer = Timer.periodic(Duration(minutes: 1), (_) {
+    _usageTimer = Timer.periodic(const Duration(minutes: 1), (_) {
       _checkTimeLimit();
       _sendUsageToServer();
     });

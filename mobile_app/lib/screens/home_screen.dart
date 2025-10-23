@@ -6,6 +6,8 @@ import '../widgets/circular_timer.dart';
 import '../widgets/quick_stats.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -45,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     };
 
     // Update timer every minute
-    _timer = Timer.periodic(Duration(minutes: 1), (_) {
+    _timer = Timer.periodic(const Duration(minutes: 1), (_) {
       setState(() {
         _remainingMinutes = _timeService.remainingMinutes;
       });
@@ -68,8 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: Text('時間到了！'),
-        content: Column(
+        title: const Text('時間到了！'),
+        content: const Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.lock_clock, size: 64, color: Colors.orange),
@@ -80,11 +82,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           TextButton(
-            child: Text('申請延長時間'),
             onPressed: _requestMoreTime,
+            child: Text('申請延長時間'),
           ),
           TextButton(
-            child: Text('好的'),
+            child: const Text('好的'),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ],
@@ -95,9 +97,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void _showTimeLimitNotification() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('注意！只剩下 5 分鐘了'),
+        content: const Text('注意！只剩下 5 分鐘了'),
         backgroundColor: Colors.orange,
-        duration: Duration(seconds: 5),
+        duration: const Duration(seconds: 5),
         action: SnackBarAction(
           label: '知道了',
           textColor: Colors.white,
@@ -111,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.of(context).pop();
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) => const AlertDialog(
         title: Text('申請延長時間'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -125,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     // Auto close after 2 seconds
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pop();
     });
   }
@@ -133,10 +135,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF7F9FC),
+      backgroundColor: const Color(0xFFF7F9FC),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -147,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         '你好！',
                         style: TextStyle(
                           fontSize: 28,
@@ -157,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Text(
                         _getGreeting(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Color(0xFF636E72),
                         ),
@@ -165,17 +167,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   IconButton(
-                    icon: Icon(Icons.notifications_outlined),
+                    icon: const Icon(Icons.notifications_outlined),
                     onPressed: () {},
                   ),
                 ],
               ),
 
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
 
               // Main Timer Card
               Container(
-                padding: EdgeInsets.all(24),
+                padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -183,26 +185,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     BoxShadow(
                       color: Colors.black.withOpacity(0.05),
                       blurRadius: 10,
-                      offset: Offset(0, 5),
+                      offset: const Offset(0, 5),
                     ),
                   ],
                 ),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       '今日剩餘時間',
                       style: TextStyle(
                         fontSize: 18,
                         color: Color(0xFF636E72),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     CircularTimer(
                       remainingMinutes: _remainingMinutes,
                       totalMinutes: 120, // Default 2 hours
                       isLocked: _isLocked,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -214,10 +216,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               // Quick Stats
-              Text(
+              const Text(
                 '今日統計',
                 style: TextStyle(
                   fontSize: 20,
@@ -225,13 +227,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Color(0xFF2D3436),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               QuickStats(usageMinutes: _usedMinutes),
 
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
 
               // Quick Actions
-              Text(
+              const Text(
                 '快速操作',
                 style: TextStyle(
                   fontSize: 20,
@@ -239,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Color(0xFF2D3436),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
@@ -247,17 +249,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       icon: Icons.task_alt,
                       title: '任務',
                       subtitle: '完成任務賺積分',
-                      color: Color(0xFF7C4DFF),
+                      color: const Color(0xFF7C4DFF),
                       onTap: () {},
                     ),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: _buildActionCard(
                       icon: Icons.shopping_bag,
                       title: '商城',
                       subtitle: '兌換獎勵',
-                      color: Color(0xFF4ECDC4),
+                      color: const Color(0xFF4ECDC4),
                       onTap: () {},
                     ),
                   ),
@@ -269,9 +271,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Color(0xFF7C4DFF),
-        unselectedItemColor: Color(0xFF95A5A6),
-        items: [
+        selectedItemColor: const Color(0xFF7C4DFF),
+        unselectedItemColor: const Color(0xFF95A5A6),
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: '首頁',
@@ -305,12 +307,12 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             color: Color(0xFF95A5A6),
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           value,
           style: TextStyle(
@@ -334,7 +336,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
       child: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(16),
@@ -343,19 +345,19 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(icon, color: color, size: 32),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF2D3436),
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
               subtitle,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: Color(0xFF636E72),
               ),

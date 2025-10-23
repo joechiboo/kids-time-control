@@ -8,7 +8,18 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(flutter create:*)"
+      "Bash(flutter create:*)",
+      "Bash(choco:*)",
+      "Bash(npm install)",
+      "Bash(code:*)",
+      "Bash(flutter:*)",
+      "Bash(C:\\tools\\flutter\\bin\\flutter.bat doctor)",
+      "Bash(C:Flutterflutterbinflutter.bat doctor)",
+      "Bash(powershell:*)",
+      "Bash(git rm:*)",
+      "Bash(git clean:*)",
+      "Bash(rm:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
