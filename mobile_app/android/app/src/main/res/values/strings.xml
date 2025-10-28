@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kids Time Control</string>
+    <string name="accessibility_service_description">此服務用於時間控制功能，當時間用完時會鎖定裝置，防止切換到其他應用。</string>
+</resources>

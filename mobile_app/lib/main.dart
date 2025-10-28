@@ -1,31 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'screens/home_screen.dart';
-import 'screens/parent_dashboard.dart';
-import 'services/time_control_service.dart';
-import 'services/socket_service.dart';
-import 'providers/app_state.dart';
+import 'screens/home_screen_simple.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize services
-  final socketService = SocketService();
-  final timeControlService = TimeControlService(socketService);
-
-  await socketService.connect();
-  await timeControlService.initialize();
-
-  runApp(
-    MultiProvider(
-      providers: [
-        Provider(create: (_) => socketService),
-        Provider(create: (_) => timeControlService),
-        ChangeNotifierProvider(create: (_) => AppState()),
-      ],
-      child: MyApp(),
-    ),
-  );
+void main() {
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -37,27 +14,11 @@ class MyApp extends StatelessWidget {
       title: 'Kids Time Control',
       theme: ThemeData(
         primaryColor: const Color(0xFF7C4DFF),
-        fontFamily: 'Roboto',
-        visualDensity: VisualDensity.adaptivePlatformDensity, colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple).copyWith(secondary: Color(0xFF4ECDC4)),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple)
+            .copyWith(secondary: const Color(0xFF4ECDC4)),
       ),
-      home: AuthWrapper(),
+      home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
-  }
-}
-
-class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final appState = context.watch<AppState>();
-
-    // Check user role and show appropriate screen
-    if (appState.userRole == 'parent') {
-      return ParentDashboard();
-    } else {
-      return HomeScreen();
-    }
   }
 }
