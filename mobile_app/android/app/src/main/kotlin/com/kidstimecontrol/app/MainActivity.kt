@@ -1,5 +1,0 @@
-package com.kidstimecontrol.app
-
-import io.flutter.embedding.android.FlutterActivity
-
-class MainActivity: FlutterActivity()
