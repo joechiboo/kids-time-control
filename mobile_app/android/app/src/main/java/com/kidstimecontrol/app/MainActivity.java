@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import android.view.WindowManager;
 import android.app.ActivityManager;
 import android.content.Intent;
+import android.os.Build;
 
 public class MainActivity extends FlutterActivity {
     private static final String CHANNEL = "com.kidstimecontrol.app/lock";
@@ -52,10 +53,29 @@ public class MainActivity extends FlutterActivity {
 
             // 防止螢幕關閉
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+            // 啟用 Screen Pinning (Task Lock)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                try {
+                    startLockTask();
+                } catch (Exception e) {
+                    // 如果失敗，記錄錯誤但不中斷流程
+                    e.printStackTrace();
+                }
+            }
         } else {
             setShowWhenLocked(false);
             setTurnScreenOn(false);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+            // 停用 Screen Pinning
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                try {
+                    stopLockTask();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
